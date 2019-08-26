@@ -1,3 +1,5 @@
+import java.io.FileOutputStream;
+
 public class Deadline extends Task {
     protected String by;
 
@@ -10,4 +12,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
 }

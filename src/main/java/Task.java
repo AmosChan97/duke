@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,5 +23,8 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public void saveInFile() {
     }
 }
