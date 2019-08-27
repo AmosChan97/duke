@@ -80,8 +80,6 @@ public class Duke {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("☹ OOPS!!! Input is not an integer");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
