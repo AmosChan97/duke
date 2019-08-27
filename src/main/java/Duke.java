@@ -1,10 +1,21 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static boolean added;
     private static ArrayList<Task> list = new ArrayList<>();
+    enum dateFormat {
+        NONE,
+        DATE_ONLY,
+        TIME_ONLY,
+        DATE_TIME
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -91,6 +102,7 @@ public class Duke {
             String tempD = input.substring(9);
             if (!tempD.contains(" /by ")) throw new DukeException("☹ OOPS!!! Please add a deadline for the task.");
             String[] splitD = tempD.split(" /by ");
+            if (!isValidDateTime(splitD[1])) throw  new DukeException("Please enter correct date time format: dd/mm/yyyy hhmm");
             Deadline deadline = new Deadline(splitD[0], splitD[1]);
             list.add(deadline);
             added = true;
@@ -182,6 +194,18 @@ public class Duke {
             //e.printStackTrace();
             File dir = new File("data");
             dir.mkdir();
+        }
+    }
+
+    private static boolean isValidDateTime (String dateTime) {
+        SimpleDateFormat dateTimeFormat =  new SimpleDateFormat("d/M/yyyy HHmm");
+        SimpleDateFormat dateOnlyFormat =  new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeOnlyFormat =  new SimpleDateFormat("HHmm");
+        try {
+            dateTimeFormat.parse(dateTime);
+            return true;
+        } catch (ParseException e) {
+            return false;
         }
     }
 }
