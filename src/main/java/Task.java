@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Task {
     protected String description;
@@ -25,6 +26,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    public void saveInFile() {
+    public void saveInFile() throws IOException{
+        String toWrite = this.isDone + " | " + this.description;
+        FileOutputStream f = new FileOutputStream(Constants.FILENAME, true);
+        f.write(toWrite.getBytes());
+        f.close();
     }
 }

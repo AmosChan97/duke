@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
+        fileToList();
+
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
@@ -24,8 +27,14 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void SaveTask(Task t) {
-        t.saveInFile();
+    public static void SaveTask(Task t) {
+        try {
+            t.saveInFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("Please make file " + Constants.FILENAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void list() {
@@ -42,16 +51,39 @@ public class Duke {
     }
 
     private static void markDone(String[] splitStr) {
+        int n = 0;
         try {
             if (splitStr.length == 1)
                 throw new DukeException("☹ OOPS!!! Please add the index of the task you have completed");
-            int n = Integer.parseInt(splitStr[1]);
+            n = Integer.parseInt(splitStr[1]);
+            if (n < 1 || n > list.size()) throw new DukeException("☹ OOPS!!! That task is not in your list");
             list.get(n - 1).markAsDone();
+            File fileToRead = new File(Constants.FILENAME);
+            Scanner scan_file = new Scanner(fileToRead);
+            String line, toWrite = "";
+            while (scan_file.hasNextLine()) {
+                line = scan_file.nextLine();
+                if (line.contains(list.get(n - 1).description)) {
+                    String[] lineSplit = line.split(" \\| ");
+                    lineSplit[1] = "1";
+                    line = lineSplit[0];
+                    for (int i = 1; i < lineSplit.length; i++) {
+                        line += " | " + lineSplit[i];
+                    }
+                }
+                line += "\n";
+                toWrite += line;
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(Constants.FILENAME);
+            fileOutputStream.write(toWrite.getBytes());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("☹ OOPS!!! Input is not an integer");
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -103,16 +135,22 @@ public class Duke {
         } else if (splitStr[0].equals("done")) {
             markDone(splitStr);
         } else {
-            if (splitStr[0].equals("deadline")) {
-                setDeadline(input, splitStr);
-            } else if (splitStr[0].equals("todo")) {
-                setToDo(input, splitStr);
-            } else if (splitStr[0].equals("event")) {
-                setEvent(input, splitStr);
-            } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            switch (splitStr[0]) {
+                case "deadline":
+                    setDeadline(input, splitStr);
+                    break;
+                case "todo":
+                    setToDo(input, splitStr);
+                    break;
+                case "event":
+                    setEvent(input, splitStr);
+                    break;
+                default:
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    break;
             }
-            if (added == true) {
+            if (added) {
+                SaveTask(list.get(list.size() -1));
                 System.out.println("Got it. I've added this task:\n"
                         + list.get(list.size() - 1).toString());
                 System.out.printf("Now you have %d task(s) in the list.\n", list.size());
@@ -121,5 +159,31 @@ public class Duke {
 
     }
 
-
+    private static void fileToList () {
+        try {
+            File fileToRead = new File(Constants.FILENAME);
+            Scanner scan_file = new Scanner(fileToRead);
+            while (scan_file.hasNextLine()) {
+                String line = scan_file.nextLine();
+                String[] splitStr = line.split(" \\| ");
+                switch (splitStr[0]) {
+                    case "T" :
+                        list.add(new Todo(splitStr[1], splitStr[2]));
+                        break;
+                    case "E" :
+                        list.add(new Event(splitStr[1], splitStr[2], splitStr[3]));
+                        break;
+                    case "D" :
+                        list.add(new Deadline(splitStr[1], splitStr[2], splitStr[3]));
+                        break;
+                    default:
+                        list.add(new Task(splitStr[1]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            //e.printStackTrace();
+            File dir = new File("data");
+            dir.mkdir();
+        }
+    }
 }
