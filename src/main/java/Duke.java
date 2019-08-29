@@ -10,12 +10,6 @@ import java.util.Scanner;
 public class Duke {
     private static boolean added;
     private static ArrayList<Task> list = new ArrayList<>();
-    enum dateFormat {
-        NONE,
-        DATE_ONLY,
-        TIME_ONLY,
-        DATE_TIME
-    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -25,14 +19,39 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
-
         fileToList();
 
         Scanner scanner = new Scanner(System.in);
-
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            addTask(input);
+            added = false;
+            String[] splitStr = input.split(" ");
+            switch (splitStr[0]) {
+                case "list":
+                    list();
+                    break;
+                case "done":
+                    markDone(splitStr);
+                    break;
+                case "deadline":
+                    setDeadline(input, splitStr);
+                    break;
+                case "todo":
+                    setToDo(input, splitStr);
+                    break;
+                case "event":
+                    setEvent(input, splitStr);
+                    break;
+                default:
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    break;
+            }
+            if (added) {
+                SaveTask(list.get(list.size() -1));
+                System.out.println("Got it. I've added this task:\n"
+                        + list.get(list.size() - 1).toString());
+                System.out.printf("Now you have %d task(s) in the list.\n", list.size());
+            }
             input = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
@@ -135,38 +154,6 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    private static void addTask(String input) {
-        added = false;
-        String[] splitStr = input.split(" ");
-        if (input.equals("list")) {
-            list();
-        } else if (splitStr[0].equals("done")) {
-            markDone(splitStr);
-        } else {
-            switch (splitStr[0]) {
-                case "deadline":
-                    setDeadline(input, splitStr);
-                    break;
-                case "todo":
-                    setToDo(input, splitStr);
-                    break;
-                case "event":
-                    setEvent(input, splitStr);
-                    break;
-                default:
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    break;
-            }
-            if (added) {
-                SaveTask(list.get(list.size() -1));
-                System.out.println("Got it. I've added this task:\n"
-                        + list.get(list.size() - 1).toString());
-                System.out.printf("Now you have %d task(s) in the list.\n", list.size());
-            }
-        }
-
     }
 
     private static void fileToList () {
