@@ -1,9 +1,6 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,6 +39,9 @@ public class Duke {
                 case "event":
                     setEvent(input, splitStr);
                     break;
+                case "delete":
+                    deleteTask(splitStr);
+                    break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
@@ -55,6 +55,40 @@ public class Duke {
             input = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void deleteTask(String[] splitStr) {
+        int n;
+        try {
+            if (splitStr.length == 1)
+                throw new DukeException("☹ OOPS!!! Please add the index of the task you want to remove");
+            n = Integer.parseInt(splitStr[1]);
+            if (n < 1 || n > list.size()) throw new DukeException("☹ OOPS!!! That task is not in your list");
+            File fileToRead = new File(Constants.FILENAME);
+            Scanner scan_file = new Scanner(fileToRead);
+            String line, toWrite = "";
+            for (int i = 1; i < n; i++) {
+                line = scan_file.nextLine();
+                toWrite += line + "\n";
+            }
+            scan_file.nextLine();
+            while (scan_file.hasNextLine()) {
+                line = scan_file.nextLine();
+                toWrite += line + "\n";
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(Constants.FILENAME);
+            fileOutputStream.write(toWrite.getBytes());
+            System.out.println("Got it. I've removed this task:\n"
+                    + list.get(n - 1).toString());
+            list.remove(n - 1);
+            System.out.printf("Now you have %d task(s) in the list.\n", list.size());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("☹ OOPS!!! Input is not an integer");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void SaveTask(Task t) {
