@@ -13,6 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 
-C:\Users\Amos Chan\Documents\CS2113T\duke\data\duke.txt
-.gitignore
 duke.txt
