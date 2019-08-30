@@ -1,9 +1,6 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,6 +39,9 @@ public class Duke {
                 case "event":
                     setEvent(input, splitStr);
                     break;
+                case "find":
+                    findTask(input, splitStr);
+                    break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
@@ -55,6 +55,23 @@ public class Duke {
             input = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void findTask(String input, String[] splitStr) {
+        boolean found = false;
+        try {
+            if (splitStr.length == 1) throw new DukeException("☹ OOPS!!! Please input a string to search");
+            String textToFind = input.substring(5);
+            for(int i = 0; i < list.size(); i++) {
+                if (list.get(i).contains(textToFind)) {
+                    found = true;
+                    System.out.println(i + 1 + ". " + list.get(i).toString());
+                }
+            }
+            if (!found) System.out.println("No items match your search!");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void SaveTask(Task t) {
