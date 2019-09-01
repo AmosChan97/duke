@@ -42,6 +42,9 @@ public class Duke {
                 case "delete":
                     deleteTask(splitStr);
                     break;
+                case "find":
+                    findTask(input, splitStr);
+                    break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
@@ -88,6 +91,23 @@ public class Duke {
             System.out.println("☹ OOPS!!! Input is not an integer");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void findTask(String input, String[] splitStr) {
+        boolean found = false;
+        try {
+            if (splitStr.length == 1) throw new DukeException("☹ OOPS!!! Please input a string to search");
+            String textToFind = input.substring(5);
+            for(int i = 0; i < list.size(); i++) {
+                if (list.get(i).contains(textToFind)) {
+                    found = true;
+                    System.out.println(i + 1 + ". " + list.get(i).toString());
+                }
+            }
+            if (!found) System.out.println("No items match your search!");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
