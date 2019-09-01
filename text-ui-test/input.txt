@@ -1,0 +1,7 @@
+list
+deadline assignment /by 2/9/2019 1200
+done 6
+list
+remove 6
+add
+bye
