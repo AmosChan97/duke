@@ -14,3 +14,4 @@ src/main/resources/docs/
 bin/
 
 duke.txt
+/text-ui-test/ACTUAL.txt
