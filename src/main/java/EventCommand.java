@@ -4,8 +4,8 @@ public class EventCommand extends Command{
     String[] splitD;
     public EventCommand(String input, String[] splitStr) throws DukeException {
         if (splitStr.length == 1) throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-        String tempD = input.substring(9);
-        if (!tempD.contains(" /by ")) throw new DukeException("☹ OOPS!!! Please add a event for the task.");
+        String tempD = input.substring(6);
+        if (!tempD.contains(" /at ")) throw new DukeException("☹ OOPS!!! Please add a event for the task.");
         this.splitD = tempD.split(" /at ");
         if (!isValidDateTime(splitD[1])) throw  new DukeException("Please enter correct date time format: dd/mm/yyyy hhmm");
     }

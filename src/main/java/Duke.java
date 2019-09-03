@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Duke {
-    private static boolean added;
-    private static ArrayList<Task> list = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
