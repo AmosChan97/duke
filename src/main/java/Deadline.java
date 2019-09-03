@@ -41,9 +41,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toWriteFile() {
+        int boolToInt = isDone ? 1 : 0;
+        return "D | " + boolToInt + " | " + this.description + " | " + this.by + "\n";
+    }
+
+    @Override
     public void saveInFile() throws IOException {
+
         int boolToInt = isDone ? 1 : 0;
         String toWrite = "D | " + boolToInt + " | " + this.description + " | " + this.by + "\n";
+
         FileOutputStream f = new FileOutputStream(Constants.FILENAME, true);
         f.write(toWrite.getBytes());
         f.close();

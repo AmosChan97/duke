@@ -38,6 +38,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toWriteFile() {
+        int boolToInt = isDone ? 1 : 0;
+        return "E | " + boolToInt + " | " + this.description + " | " + this.at + "\n";
+    }
+
+    @Override
     public void saveInFile() throws IOException {
         int boolToInt = isDone ? 1 : 0;
         String toWrite = "E | " + boolToInt + " | " + this.description + " | " + this.at + "\n";

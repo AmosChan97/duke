@@ -22,13 +22,16 @@ public class Task {
     }
 
     public boolean contains(String s) {
-        if (this.description.contains(s)) return true;
-        return false;
+        return this.description.contains(s);
     }
 
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toWriteFile() {
+        return this.description;
     }
 
     public void saveInFile() throws IOException{
