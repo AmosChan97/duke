@@ -22,8 +22,7 @@ public class Task {
     }
 
     public boolean contains(String s) {
-        if (this.description.contains(s)) return true;
-        return false;
+        return this.description.contains(s);
     }
 
     @Override

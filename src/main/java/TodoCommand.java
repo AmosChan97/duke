@@ -8,7 +8,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Todo todo = new Todo(this.string);
         tasks.add(todo);
         storage.saveToFile(tasks);

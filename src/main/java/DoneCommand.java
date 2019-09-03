@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class DoneCommand extends Command {
     private int n;
