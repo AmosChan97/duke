@@ -1,18 +1,26 @@
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
+
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
 
     void showLoadingError() {
         System.out.println(":( OOPS!!! File path not found. Creating directory /data/data.txt");
     }
 
-    void showError(String error) {
+    public void showError(String error) {
         System.out.println(error);
     }
 
     public String readCommand() {
         return scanner.nextLine();
+    }
+
+    public void showString(String string) {
+        System.out.println(string);
     }
 
     public void showWelcome() {
@@ -23,5 +31,13 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
+    }
+
+    public void showLine() {
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public void showBye() {
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }

@@ -18,6 +18,12 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toWriteFile() {
+        int boolToInt = this.isDone ? 1 : 0;
+        return "T | " + boolToInt + " | " + this.description + "\n";
+    }
+
+    @Override
     public void saveInFile() throws IOException {
         int boolToInt = this.isDone ? 1 : 0;
         String toWrite = "T | " + boolToInt + " | " + this.description + "\n";

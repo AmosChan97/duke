@@ -31,6 +31,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    public String toWriteFile() {
+        return this.description;
+    }
+
     public void saveInFile() throws IOException{
         String toWrite = this.isDone + " | " + this.description;
         FileOutputStream f = new FileOutputStream(Constants.FILENAME, true);
