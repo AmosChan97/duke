@@ -14,6 +14,6 @@ public class TodoCommand extends Command {
         storage.saveToFile(tasks);
         ui.showString("Got it, I've added this task: \n" +
                 todo.toString() + "\n" +
-                "Now you have " + tasks.size() + " tasks in your list");
+                "Now you have " + tasks.size() + " task(s) in your list");
     }
 }
