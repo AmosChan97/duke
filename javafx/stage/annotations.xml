@@ -1,0 +1,7 @@
+<root>
+    <item name='javafx.stage.Stage void setScene(javafx.scene.Scene)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>
