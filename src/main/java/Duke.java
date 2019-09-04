@@ -19,7 +19,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+/*
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcome();
@@ -44,9 +44,9 @@ public class Duke extends Application {
             }
         }
     }
-
+*/
     public static void main(String[] args) {
-        new Duke(Constants.FILENAME).run();
+        launch();
     }
 
 }
