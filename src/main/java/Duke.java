@@ -84,7 +84,9 @@ public class Duke extends Application {
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-/*
+
+    public Duke() {}
+
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcome();
@@ -109,9 +111,9 @@ public class Duke extends Application {
             }
         }
     }
-*/
+
     public static void main(String[] args) {
-        launch();
+        new Duke(Constants.FILENAME).run();
     }
 
     /**
