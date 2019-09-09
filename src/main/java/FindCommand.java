@@ -1,6 +1,13 @@
 import java.io.IOException;
 
+/**
+ * Command to find and display tasks the user searches for
+ */
 public class FindCommand extends Command{
+
+    /**
+     * User input text to search
+     */
     private String textToFind;
     public FindCommand(String input, String[] splitStr) throws DukeException {
         if (splitStr.length == 1) throw new DukeException("☹ OOPS!!! Please input a string to search");

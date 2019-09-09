@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Command to create and save events
+ */
 public class EventCommand extends Command{
     String[] splitD;
     public EventCommand(String input, String[] splitStr) throws DukeException {

@@ -2,9 +2,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Events are tasks with a start and end time
+ */
 public class Event extends Task {
     protected Date dateTime;
     protected String at;
@@ -48,6 +50,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 
+    /**
+     * Returns a string that is formatted for the text file
+     * @return String
+     */
     @Override
     public String toWriteFile() {
         int boolToInt = isDone ? 1 : 0;

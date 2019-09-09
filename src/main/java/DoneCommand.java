@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Command to mark task as done
+ */
 public class DoneCommand extends Command {
     private int n;
     public DoneCommand(String[] splitStr) throws DukeException {

@@ -1,3 +1,6 @@
+/**
+ * parse input and execute respective user command
+ */
 public class Parser{
     public static Command parse(String input) throws DukeException {
         String[] splitStr = input.split(" ");
