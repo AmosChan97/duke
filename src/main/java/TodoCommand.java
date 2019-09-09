@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Command to add new Todo to task list
+ */
 public class TodoCommand extends Command {
     private String string;
     public TodoCommand(String input, String[] splitStr) throws DukeException {

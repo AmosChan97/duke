@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * To deal with user interactions
+ */
 public class Ui {
     private Scanner scanner;
 

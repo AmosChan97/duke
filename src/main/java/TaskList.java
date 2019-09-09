@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Contains task list
+ */
 public class TaskList extends ArrayList<Task> {
     public TaskList(ArrayList<String> loader) throws DukeException {
         for (String line : loader) {
