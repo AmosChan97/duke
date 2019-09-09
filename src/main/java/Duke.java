@@ -1,11 +1,19 @@
 import java.io.*;
 
+/**
+ * Main Duke class
+ * Duke is a chatbot that manage tasks for the user
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private boolean isExit;
 
+    /**
+     * Constructor for Duke
+     * @param filePath path of text file containing task list
+     */
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcome();
@@ -18,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     *  Main Duke logic run here
+     */
     public void run() {
         while (!isExit) {
             try {
@@ -31,6 +42,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function of Duke
+     * @param args input from command line
+     */
     public static void main(String[] args) {
         new Duke(Constants.FILENAME).run();
     }

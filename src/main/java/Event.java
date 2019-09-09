@@ -9,6 +9,11 @@ public class Event extends Task {
     protected Date dateTime;
     protected String at;
 
+    /**
+     * Event Constructor
+     * @param description task description
+     * @param at task time period
+     */
     public Event (String description, String at) {
         super(description);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -20,6 +25,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Event Constructor from text file
+     * @param i isDone status
+     * @param description
+     * @param at
+     */
     public Event (String i, String description, String at) {
         super(description);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");

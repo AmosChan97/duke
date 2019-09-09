@@ -8,6 +8,14 @@ public class DeleteCommand extends Command{
         this.n = Integer.parseInt(splitStr[1]);
     }
 
+    /**
+     * Run the command
+     * @param tasks task list
+     * @param ui user interface
+     * @param storage handles read write of text file
+     * @throws DukeException
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (this.n < 1 || this.n > tasks.size()) throw new DukeException("☹ OOPS!!! That task is not in your list");
